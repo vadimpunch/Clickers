@@ -1,3 +1,3 @@
 <?php
 
-echo $currentDate;
+echo'lololo';
