@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "../css/includes.php";
-
+require_once "../lib/QuizeInfoOutput.php";
 ?>
 
 
@@ -19,16 +19,16 @@ require_once "../css/includes.php";
     <div class="col-md-2 col-xs-12 sidebar" id="sidebar_container">
         <ul class="nav flex-column nav-pills nav-fill" >
             <li class="nav-item">
-                <a class="nav-link "  href="#">Опитування викладачів</a>
+                <a class="nav-link "  href="TutorsQuizes.php">Опитування викладачів</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Опитування <br> студентів</a>
+                <a class="nav-link" href="StudentsQuizes.php">Опитування <br> студентів</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Опитування факультета</a>
+                <a class="nav-link" href="FacultyQuizes.php">Опитування факультета</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Опитування університета</a>
+                <a class="nav-link" href="UniversityQuizes.php">Опитування університета</a>
                 <hr>
             </li>
             <li class="nav-item">
@@ -37,7 +37,18 @@ require_once "../css/includes.php";
         </ul>
     </div>
 
+<?php
+$db = new QuizeInfoOutput();
+$themes = $db->selectAttrInCategory('Опитування викладачів', 'Theme');
+$authorsName =  $db->selectAttrInCategory('Опитування викладачів', 'AuthorName');
+$authorsSurName =  $db->selectAttrInCategory('Опитування викладачів', 'AuhtorSurname');
+$date = $db->selectAttrInCategory('Опитування викладачів', 'Date');
+$countVotings = $db->selectAttrInCategory('Опитування викладачів', 'Date');
 
+
+
+
+?>
     <div class="col-md-10 col-xs-12 main">
         <h1 class="text-center display-4">Опитування викладачів</h1>
         <table class="table table-bordered">
@@ -51,29 +62,14 @@ require_once "../css/includes.php";
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Marksdkjgsk</td>
-                <td>Otto fon Bismark huismark</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@TwBootstrap</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            <?php for ($i=0; $i<=count($themes)-1; $i++)
+{ echo("<tr>
+                <th scope=\"row\">{$i}</th>
+                <td>{$themes[$i]}</td>
+                <td>{$authorsName[$i]} {$authorsSurName[$i]}</td>
+                <td>{$date[$i]}</td>
+                <td>{$countVotings[$i]}</td>
+            </tr>");} ?>
             </tbody>
         </table>
     </div>

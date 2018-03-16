@@ -1,312 +1,76 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <title>Admin Template</title>
-    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/menu.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/global.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/modal.js" type="text/javascript" charset="utf-8"></script>
-    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
-    <!--[if IE 6]>
-    <link rel="stylesheet" href="css/ie6.css" type="text/css" media="screen" charset="utf-8" />
-    <![endif]-->
-</head>
-<body>
-<div id="header">
-    <div class="col w5 bottomlast">
-        <a href="" class="logo">
-            <img src="images/logo.gif" alt="Logo" />
-        </a>
+<?php
+session_start();
+require_once "../css/includes.php";
+require_once "../lib/QuizeInfoOutput.php";
+?>
+
+
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand" href="#">
+        <img src="../images/logo.png" width="45" height="45" class="d-inline-block align-top" alt="">
+        <?php  echo "Вітаю, <i>{$_SESSION['user_name']} {$_SESSION['user_surname']}</i>!"?>
+    </span>
+    <span class="navbar-brand mb-0"><b class="h4">Clickers</b></span>
+    <form class="form-inline">
+        <button class="btn btn-outline-danger" type="button">Вийти</button>
+    </form>
+</nav>
+<div class="row container-fluid">
+    <div class="col-md-2 col-xs-12 sidebar" id="sidebar_container">
+        <ul class="nav flex-column nav-pills nav-fill" >
+            <li class="nav-item">
+                <a class="nav-link "  href="TutorsQuizes.php">Опитування викладачів</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="StudentsQuizes.php">Опитування <br> студентів</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="FacultyQuizes.php">Опитування факультета</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="UniversityQuizes.php">Опитування університета</a>
+                <hr>
+            </li>
+            <li class="nav-item">
+                <a href="NewQuize.php" id="newQuizbtn"><button class="btn btn-outline-info" type="button">Створити опитування</button></a>
+            </li>
+        </ul>
     </div>
-    <div class="col w5 last right bottomlast">
-        <p class="last">Logged in as <span class="strong">Admin,</span> <a href="">Logout</a></p>
-    </div>
-    <div class="clear"></div>
-</div>
-<div id="wrapper">
-    <div id="minwidth">
-        <div id="holder">
-            <div id="menu">
-                <div id="left"></div>
-                <div id="right"></div>
-                <ul>
-                    <li>
-                        <a href="index.html"><span>Help</span></a>
-                    </li>
-                    <li>
-                        <a href="users.html"><span>Users</span></a>
-                    </li>
-                    <li>
-                        <a href="articles.html" class="selected"><span>Articles</span></a>
-                    </li>
-                </ul>
-                <div class="clear"></div>
-            </div>
-            <div id="submenu">
-                <div class="modules_left">
-                    <div class="module buttons">
-                        <a href="" class="dropdown_button"><small class="icon plus"></small><span>New Category</span></a>
-                        <div class="dropdown">
-                            <div class="arrow"></div>
-                            <div class="content">
-                                <form>
-                                    <p>
-                                        <label for="name">Category Name:</label>
-                                        <input type="text" class="text w_22" name="name" id="name" value="" />
-                                    </p>
-                                    <p>
-                                        <label for="description">Category Description:</label>
-                                        <textarea name="description" id="description" class="w_22" rows="10"></textarea>
-                                    </p>
-                                </form>
-                                <a href="" class="button green right"><small class="icon check"></small><span>Save</span></a>
-                                <a class="button red mr right close"><small class="icon cross"></small><span>Close</span></a>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="title">
-                    Articles
-                </div>
-                <div class="modules_right">
-                    <div class="module search">
-                        <form action="">
-                            <p><input type="text" value="Search..." name="user_search" /></p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div id="desc">
-                <div class="body">
-                    <div class="col w2">
-                        <div class="content">
-                            <div class="box header">
-                                <div class="head"><div></div></div>
-                                <h2>Categories</h2>
-                                <div class="desc">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                </div>
-                                <div class="bottom"><div></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col w8 last">
-                        <div class="content">
-                            <div class="shelf">
-                                <div class="left"></div>
-                                <div class="right"></div>
-                                <div class="inside">
-                                    <div class="books articles">
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2 last">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="shelf">
-                                <div class="left"></div>
-                                <div class="right"></div>
-                                <div class="inside">
-                                    <div class="books articles">
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2 last">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="shelf">
-                                <div class="left"></div>
-                                <div class="right"></div>
-                                <div class="inside">
-                                    <div class="books articles">
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2 last">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="shelf">
-                                <div class="left"></div>
-                                <div class="right"></div>
-                                <div class="inside">
-                                    <div class="books articles">
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2 last">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="shelf">
-                                <div class="left"></div>
-                                <div class="right"></div>
-                                <div class="inside">
-                                    <div class="books articles">
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                        <div class="col w2 last">
-                                            <a href="">
-                                                <span>Here is the title, two lines</span>
-                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</small>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="clear"></div>
-                <div id="body_footer">
-                    <div id="bottom_left"><div id="bottom_right"></div></div>
-                </div>
-            </div>
-        </div>
+
+    <?php
+    $db = new QuizeInfoOutput();
+    $themes = $db->selectAttrInCategory('Опитування студентів', 'Theme');
+    $authorsName =  $db->selectAttrInCategory('Опитування студентів', 'AuthorName');
+    $authorsSurName =  $db->selectAttrInCategory('Опитування студентів', 'AuhtorSurname');
+    $date = $db->selectAttrInCategory('Опитування студентів', 'Date');
+    $countVotings = $db->selectAttrInCategory('Опитування студентів', 'Date');
+
+
+
+
+    ?>
+    <div class="col-md-10 col-xs-12 main">
+        <h1 class="text-center display-4">Опитування студентів</h1>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Тема</th>
+                <th>Автор</th>
+                <th>Дата</th>
+                <th>Кількість опитуваних</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php for ($i=0; $i<=count($themes)-1; $i++)
+            { echo("<tr>
+                <th scope=\"row\">{$i}</th>
+                <td>{$themes[$i]}</td>
+                <td>{$authorsName[$i]} {$authorsSurName[$i]}</td>
+                <td>{$date[$i]}</td>
+                <td>{$countVotings[$i]}</td>
+            </tr>");} ?>
+            </tbody>
+        </table>
     </div>
 </div>
-<div id="footer">
-    <p class="last">Copyright 2009 - Gray Admin Template - Created by <a href="">Passatgt</a></p>
-</div>
-</body>
-</html>

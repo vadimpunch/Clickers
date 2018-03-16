@@ -6,19 +6,30 @@ class WorkWithDB
     public $value_sym = "{?}";
     public  $conection;
 
-
+    /**
+     * @return null|WorkWithDB
+     * pattern singleton
+     */
     public static function getDB()
     {
         if (self::$oneObject==null) self::$oneObject = new WorkWithDB();
         return self::$oneObject;
     }
 
-   private function  __construct()
+
+   public function  __construct()
     {
       $this -> conection = new mysqli('localhost', 'root', '', 'Clickers');
       $this -> conection -> query("SET NAMES 'utf8'");
     }
 
+    /**
+     * @param $query
+     * @param $params
+     * @return mixed - query with params
+     *
+     * Insert params into SQL query
+     */
     private function valueToQuery($query, $params) {
         if ($params) {
             for ($i = 0; $i < count($params); $i++) {
@@ -39,7 +50,6 @@ class WorkWithDB
         $result = $this->conection->query($this->valueToQuery($query, $value));
         if (!$result)
         {
-            echo "По данному запросу ничего не найдено";
             return false;
         }
         else
@@ -80,6 +90,29 @@ class WorkWithDB
         }
         return $result_array;
     }
+
+
+    public function selectColumn($query, $params = false)
+    {
+        $result_set = $this->conection->query($this->valueToQuery($query, $params));
+        if ((!$result_set) || ($result_set->num_rows <= 0)) return false;
+        else {
+            $resultArray = array();
+                    while ($row = $result_set->fetch_row())
+                    {
+
+                        $resultArray[] = $row[0];
+                    }
+                    $result_set->free();
+                    return $resultArray;
+
+
+
+
+        }
+    }
+
+
     public  function __destruct()
     {
         if ($this->conection)

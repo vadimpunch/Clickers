@@ -26,9 +26,9 @@ require_once "../css/includes.php";
          <label class="mr-sm-2" for="inlineFormCustomSelect">Категорія</label>
          <select class="form-control" id="inlineFormCustomSelect" name="category" required>
            <option disabled selected>Оберіть категорію опитування</option>
-           <option value="Опитування викладаів">Опитування викладаів</option>
+           <option value="Опитування викладаів">Опитування викладачів</option>
            <option value="Опитування студентів">Опитування студентів</option>
-           <option value="Опитування факульетета">Опитування факульетета</option>
+           <option value="Опитування факульетета">Опитування факультета</option>
            <option value="Опитування університета">Опитування університета</option>
          </select>
       </div>
